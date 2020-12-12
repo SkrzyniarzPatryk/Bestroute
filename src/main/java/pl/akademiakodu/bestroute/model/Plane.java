@@ -15,7 +15,7 @@ public class Plane {
     }
 
     public String getDetailsPlane() {
-        return "/plane/details/" + nameUrl;
+        return "/plane/details/" + id;
     }
     public String getPlaneImage() {
         return "/plane/" + nameUrl + "jpg";

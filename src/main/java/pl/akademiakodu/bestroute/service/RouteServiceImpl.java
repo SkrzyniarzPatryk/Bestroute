@@ -43,6 +43,12 @@ public class RouteServiceImpl implements RouteService {
         return routeList.stream().filter(route -> route.getName().equals(name)).findFirst().get();
     }
 
+    @Override
+    public Route findRouteById(Long id) {
+        return routeList.stream().filter(route -> route.getId() == id).findFirst().get();
+    }
+
+    //create
     private void createRouteList() {
         routeList = new ArrayList<>();
         routeList.add(new Route(airportService.findAirportById(1l), airportService.findAirportById(2l),

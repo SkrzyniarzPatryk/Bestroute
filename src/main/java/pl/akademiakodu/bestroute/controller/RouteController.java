@@ -22,15 +22,13 @@ public class RouteController {
         if (search_route == null) {
             model.addAttribute("routeList", routeService.getRoutes());
         } else {
-            System.out.println(search_route);
             model.addAttribute("routeList", routeService.searchRoutesByAirport(search_route));
         }
         return "home";
     }
-    @GetMapping("/route/details/{name}")
-    public String getRoute(Model model, @PathVariable String name) {
-        System.out.println(name);
-        model.addAttribute("route", routeService.findRouteByName(name));
+    @GetMapping("/route/details/{id}")
+    public String getRoute(Model model, @PathVariable Long id) {
+        model.addAttribute("route", routeService.findRouteById(id));
         return "route_details";
     }
 }

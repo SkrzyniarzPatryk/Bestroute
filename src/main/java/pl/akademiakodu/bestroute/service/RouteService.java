@@ -9,4 +9,5 @@ public interface RouteService {
     public List<Route> getRoutes();
     public Route findRouteByName(String name);
     public Set<Route> searchRoutesByAirport(String name);
+    public Route findRouteById(Long id);
 }

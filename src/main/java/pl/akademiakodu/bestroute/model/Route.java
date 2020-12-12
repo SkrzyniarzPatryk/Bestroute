@@ -15,7 +15,6 @@ public class Route {
     private LocalDateTime arrivalDate;
     private Integer delay;
     private Plane plane;
-    private String nameUrl;
     private String name;
     private static Long index = 1l;
 
@@ -31,12 +30,11 @@ public class Route {
         makeName();
     }
     public String getDetailsUrl() {
-        return "/route/details/" + name;
+        return "/route/details/" + id;
     }
 
     //==--private method--==
     private void makeName() {
-        nameUrl = Funcion.getNameWithoutSpace(startAirport.getName()) + "+" + Funcion.getNameWithoutSpace(destinationAirport.getName());
         name = startAirport.getName() + " --> " + destinationAirport.getName();
     }
 
@@ -96,14 +94,6 @@ public class Route {
 
     public void setPlane(Plane plane) {
         this.plane = plane;
-    }
-
-    public String getNameUrl() {
-        return nameUrl;
-    }
-
-    public void setNameUrl(String name) {
-        this.nameUrl = name;
     }
 
     public String getName() {

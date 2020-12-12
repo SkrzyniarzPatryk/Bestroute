@@ -15,7 +15,7 @@
     </nav>
     <form>
         <input name="search_route" type="search" placeholder="Type name airport here...">
-        <button type="submit"></button>
+        <input type="submit" value="Search">
     </form>
     <div th:each="route : ${routeList}">
         <a th:href="${route.getDetailsUrl()}">

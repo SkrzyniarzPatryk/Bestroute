@@ -18,9 +18,9 @@ public class PlaneController {
         this.planeService = planeService;
     }
 
-    @GetMapping("/details/{name}")
-    public String getDetailsPlane(Model model, @PathVariable String name) {
-        model.addAttribute("plane", planeService.findPlaneByName(name));
+    @GetMapping("/details/{id}")
+    public String getDetailsPlane(Model model, @PathVariable Long id) {
+        model.addAttribute("plane", planeService.findPlaneById(id));
         return "plane_details";
     }
 }
