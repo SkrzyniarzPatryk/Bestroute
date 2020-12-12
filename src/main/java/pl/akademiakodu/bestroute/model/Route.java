@@ -1,5 +1,9 @@
 package pl.akademiakodu.bestroute.model;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -13,6 +17,7 @@ public class Route {
     private Plane plane;
     private String nameUrl;
     private String name;
+    private String n2ame;
 
     private static Long index = 1l;
 
