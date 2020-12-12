@@ -17,8 +17,6 @@ public class Route {
     private Plane plane;
     private String nameUrl;
     private String name;
-    private String n2ame;
-
     private static Long index = 1l;
 
     public Route(Airport startAirport, Airport destinationAirport, LocalDateTime departureDate,
