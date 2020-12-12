@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona startowa</title>
+    <link rel="stylesheet" th:href="@{/app.css}" />
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/favorite}">Favorite</a></li>
+        <li><a href="http://www.google.pl">Przycisk 3</a></li>
+    </ul>
+</nav>
+<div>
+    <p th:text="${route.getName()}"></p>
+    <p th:text="${route.getDepartureDate()}"></p>
+    <p th:text="${route.getArrivalDate()}"></p>
+    <a th:href="${route.getPlane().getDetailsPlane()}"><p th:text="${route.getPlane().getName()}"></p></a>
+    <p th:text="${route.getDelay()}"></p>
+</div>
+</body>
+</html>

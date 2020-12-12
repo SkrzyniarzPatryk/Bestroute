@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona startowa</title>
+    <link rel="stylesheet" th:href="@{/app.css}" />
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/favorite}">Favorite</a></li>
+            <li><a href="http://www.google.pl">Przycisk 3</a></li>
+        </ul>
+    </nav>
+    <form>
+        <input name="search_route" type="search" placeholder="Type name airport here...">
+        <button type="submit"></button>
+    </form>
+    <div th:each="route : ${routeList}">
+        <a th:href="${route.getDetailsUrl()}">
+            <p th:text="${route.getDepartureDate()}"></p>
+            <p th:text="${route.getId()}"></p>
+        </a>
+    </div>
+</body>
+</html>
