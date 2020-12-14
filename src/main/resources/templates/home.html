@@ -13,7 +13,7 @@
             <li><a href="http://www.google.pl">Przycisk 3</a></li>
         </ul>
     </nav>
-    <form>
+    <form th:action="@{/}" method="get">
         <input name="search_route" type="search" placeholder="Type name airport here...">
         <input type="submit" value="Search">
     </form>
@@ -23,5 +23,20 @@
             <p th:text="${route.getId()}"></p>
         </a>
     </div>
+    <table>
+        <thead>
+            <tr>
+                <th>opcja1</th>
+                <th>opcja2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+        </tbody>
+    </table>
+
 </body>
 </html>

@@ -8,6 +8,7 @@ public class start {
 
     @GetMapping("/test")
     public String home() {
+
         return "Hej, to moja strona!";
     }
 }

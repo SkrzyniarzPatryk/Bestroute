@@ -3,9 +3,8 @@ package pl.akademiakodu.bestroute.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import pl.akademiakodu.bestroute.model.Route;
 import pl.akademiakodu.bestroute.service.RouteService;
 
 @Controller
@@ -15,6 +14,7 @@ public class RouteController {
     @Autowired
     public RouteController(RouteService routeService) {
         this.routeService = routeService;
+        System.out.println("kontroller tras");
     }
 
     @GetMapping("/")
@@ -25,6 +25,11 @@ public class RouteController {
             model.addAttribute("routeList", routeService.searchRoutesByAirport(search_route));
         }
         return "home";
+    }
+    @PostMapping("/test/{id}")
+    public String test(@ModelAttribute Route route, @PathVariable Long id){
+
+        return "redirect /";
     }
     @GetMapping("/route/details/{id}")
     public String getRoute(Model model, @PathVariable Long id) {

@@ -12,6 +12,13 @@ public class Airport {
         this.id = index++;
     }
 
+    //ToSql
+    public Airport(Long id, String country, String name) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+    }
+
     //==--GettersAndSetters--==
     public Long getId() {
         return id;
@@ -35,5 +42,14 @@ public class Airport {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Airport{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

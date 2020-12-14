@@ -15,6 +15,7 @@ public class PlaneController {
 
     @Autowired
     public PlaneController(PlaneService planeService) {
+        System.out.println("kontroller samolotów");
         this.planeService = planeService;
     }
 

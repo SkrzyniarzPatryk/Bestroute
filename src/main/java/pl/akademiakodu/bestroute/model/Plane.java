@@ -4,14 +4,23 @@ public class Plane {
     private Long id;
     private String name;
     private String nameUrl;
-    private Integer comfort;
+    private String comfort;
     private static Long index = 1l;
 
-    public Plane(String name, Integer comfort) {
+    public Plane(String name, String comfort) {
         this.name = name;
         this.comfort = comfort;
         this.id = index++;
         makeName();
+    }
+
+    //ToSql
+
+
+    public Plane(Long id, String name, String comfort) {
+        this.id = id;
+        this.name = name;
+        this.comfort = comfort;
     }
 
     public String getDetailsPlane() {
@@ -50,11 +59,21 @@ public class Plane {
         this.nameUrl = nameUrl;
     }
 
-    public Integer getComfort() {
+    public String getComfort() {
         return comfort;
     }
 
-    public void setComfort(Integer comfort) {
+    public void setComfort(String comfort) {
         this.comfort = comfort;
+    }
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", nameUrl='" + nameUrl + '\'' +
+                ", comfort='" + comfort + '\'' +
+                '}';
     }
 }

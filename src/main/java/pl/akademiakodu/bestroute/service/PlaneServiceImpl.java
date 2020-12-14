@@ -1,7 +1,9 @@
 package pl.akademiakodu.bestroute.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.bestroute.model.Plane;
+import pl.akademiakodu.bestroute.repository.PlaneDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +11,21 @@ import java.util.List;
 @Service
 public class PlaneServiceImpl implements PlaneService {
     List<Plane> planeList;
+    private PlaneDao planeDao;
 
-    public PlaneServiceImpl() {
+    @Autowired
+    public PlaneServiceImpl(PlaneDao planeDao) {
+        System.out.println("Plane serwis - zaczynam");
+
+        this.planeDao = planeDao;
         createPlanes();
+        List<Plane> planeList = new ArrayList<>();
+        planeList = planeDao.findAllPlanes();
+        for (Plane plane : planeList) {
+            System.out.println(plane );
+        }
+        System.out.println("Plane serwis - kończę");
+
     }
 
     @Override
@@ -26,7 +40,7 @@ public class PlaneServiceImpl implements PlaneService {
 
     private void createPlanes() {
         planeList = new ArrayList<>();
-        planeList.add(new Plane("Boeing 747", 1));
-        planeList.add(new Plane("Saab 307", 3));
+        planeList.add(new Plane("Boeing 747", "Klasa Ekonomiczna"));
+        planeList.add(new Plane("Saab 307", "Klasa Biznesowa"));
     }
 }
