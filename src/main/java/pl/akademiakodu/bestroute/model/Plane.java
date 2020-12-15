@@ -4,20 +4,10 @@ public class Plane {
     private Long id;
     private String name;
     private String nameUrl;
-    private String comfort;
-    private static Long index = 1l;
-
-    public Plane(String name, String comfort) {
-        this.name = name;
-        this.comfort = comfort;
-        this.id = index++;
-        makeName();
-    }
+    private Comfort comfort;
 
     //ToSql
-
-
-    public Plane(Long id, String name, String comfort) {
+    public Plane(Long id, String name, Comfort comfort) {
         this.id = id;
         this.name = name;
         this.comfort = comfort;
@@ -29,6 +19,7 @@ public class Plane {
     public String getPlaneImage() {
         return "/plane/" + nameUrl + "jpg";
     }
+
     //==--Private method--==
     private void makeName() {
         nameUrl = Funcion.getNameWithoutSpace(name);
@@ -59,11 +50,11 @@ public class Plane {
         this.nameUrl = nameUrl;
     }
 
-    public String getComfort() {
+    public Comfort getComfort() {
         return comfort;
     }
 
-    public void setComfort(String comfort) {
+    public void setComfort(Comfort comfort) {
         this.comfort = comfort;
     }
 

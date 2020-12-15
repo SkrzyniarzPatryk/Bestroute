@@ -3,6 +3,7 @@ package pl.akademiakodu.bestroute.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import pl.akademiakodu.bestroute.model.Comfort;
 import pl.akademiakodu.bestroute.model.Plane;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class PlaneDaoImpl implements PlaneDao {
     @Override
     public void createPlane(Plane plane) {
         String sql = "INSERT INTO planes VALUES (null, ?, ?)";
-        jdbcTemplate.update(sql, plane.getName(), plane.getComfort());
+        jdbcTemplate.update(sql, plane.getName(), plane.getComfort().name());
     }
 
     @Override
@@ -31,7 +32,7 @@ public class PlaneDaoImpl implements PlaneDao {
         planeList = jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Plane(rs.getLong("ID"),
                         rs.getString("NAME"),
-                        rs.getString("COMFORT")
+                        Comfort.valueOf(rs.getString("COMFORT"))
                 ));
         return planeList;
     }
@@ -53,7 +54,7 @@ public class PlaneDaoImpl implements PlaneDao {
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Plane(rs.getLong("ID"),
                         rs.getString("NAME"),
-                        rs.getString("COMFORT")
+                        Comfort.valueOf(rs.getString("COMFORT"))
                 ));
     }
 
@@ -63,7 +64,7 @@ public class PlaneDaoImpl implements PlaneDao {
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Plane(rs.getLong("ID"),
                         rs.getString("NAME"),
-                        rs.getString("COMFORT")
+                        Comfort.valueOf(rs.getString("COMFORT"))
                 ));
     }
 }

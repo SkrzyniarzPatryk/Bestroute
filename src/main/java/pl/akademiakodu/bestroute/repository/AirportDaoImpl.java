@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import pl.akademiakodu.bestroute.model.Airport;
+import pl.akademiakodu.bestroute.model.Country;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class AirportDaoImpl implements AirportDao {
     @Override
     public void createAirport(Airport airport) {
         String sql = "INSERT INTO airports VALUES (null, ?, ?)";
-        jdbcTemplate.update(sql, airport.getName(), airport.getCountry());
+        jdbcTemplate.update(sql, airport.getName(), airport.getCountry().name());
     }
 
     @Override
@@ -32,7 +33,7 @@ public class AirportDaoImpl implements AirportDao {
 
         List<Airport> airportList = jdbcTemplate.query(sql, (rs, rowNuw) ->
                 new Airport(rs.getLong("ID"),
-                        rs.getString("NAME"),
+                        Country.valueOf(rs.getString("NAME")),
                         rs.getString("COUNTRY")
                 ));
         return airportList;
@@ -54,7 +55,7 @@ public class AirportDaoImpl implements AirportDao {
         String sql = "SELECT * FROM airports a WHERE a.name = '" + name + "'";
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Airport(rs.getLong("ID"),
-                        rs.getString("NAME"),
+                        Country.valueOf(rs.getString("NAME")),
                         rs.getString("COUNTRY")
                 ));
     }
@@ -64,7 +65,7 @@ public class AirportDaoImpl implements AirportDao {
         String sql = "SELECT * FROM airports a WHERE a.id = " + id;
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Airport(rs.getLong("ID"),
-                        rs.getString("NAME"),
+                        Country.valueOf(rs.getString("NAME")),
                         rs.getString("COUNTRY")
                 ));
     }

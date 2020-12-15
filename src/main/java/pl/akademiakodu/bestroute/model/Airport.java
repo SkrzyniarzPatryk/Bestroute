@@ -2,18 +2,11 @@ package pl.akademiakodu.bestroute.model;
 
 public class Airport {
     private Long id;
-    private String country;
+    private Country country;
     private String name;
-    private static Long index = 1l;
-
-    public Airport(String country, String name) {
-        this.country = country;
-        this.name = name;
-        this.id = index++;
-    }
 
     //ToSql
-    public Airport(Long id, String country, String name) {
+    public Airport(Long id, Country country, String name) {
         this.id = id;
         this.name = name;
         this.country = country;
@@ -28,11 +21,11 @@ public class Airport {
         this.id = id;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 

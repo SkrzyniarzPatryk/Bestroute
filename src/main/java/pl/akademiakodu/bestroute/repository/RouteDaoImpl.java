@@ -11,29 +11,32 @@ import java.util.List;
 @Repository
 public class RouteDaoImpl implements RouteDao {
     private JdbcTemplate jdbcTemplate;
+    private AirportDao airportDao;
+    private PlaneDao planeDao;
 
     @Autowired
-    public RouteDaoImpl (JdbcTemplate jdbcTemplate) {
+    public RouteDaoImpl (JdbcTemplate jdbcTemplate, PlaneDao planeDao, AirportDao airportDao) {
         this.jdbcTemplate = jdbcTemplate;
-        System.out.println("baza tras");
+        this.airportDao = airportDao;
+        this.planeDao = planeDao;
     }
 
     @Override
     public void createRoute(Route route) {
         String sql = "INSERT INTO routes VALUES (null, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, route.getIdStartAirport(), route.getIdDestinationAirport(), route.getIdPlane(),
+        jdbcTemplate.update(sql, route.getStartAirport().getId(), route.getDestinationAirport().getId(), route.getPlane().getId(),
                 route.getDepartureDate(), route.getArrivalDate(), route.getDelay());
     }
-//route.getStartAirport().getId()route.getDestinationAirport().getId() route.getPlane().getId()
+
     @Override
     public List<Route> findAllRoutes() {
         List<Route> routeList = new ArrayList<>();
         String sql = "SELECT * FROM routes";
         routeList = jdbcTemplate.query(sql, (rs, rowNum) ->
                 new Route(rs.getLong("ID"),
-                        rs.getLong("ID_START_AIRPORT"),
-                        rs.getLong("ID_DESTINATION_AIRPORT"),
-                        rs.getLong("ID_PLANE"),
+                        airportDao.findAirportByIdSQL(rs.getLong("ID_START_AIRPORT")),
+                        airportDao.findAirportByIdSQL(rs.getLong("ID_DESTINATION_AIRPORT")),
+                        planeDao.findPlaneByIdSQL(rs.getLong("ID_PLANE")),
                         rs.getTimestamp("DATETIME_DEPARTURE").toLocalDateTime(),
                         rs.getTimestamp("DATETIME_ARRIVAL").toLocalDateTime(),
                         rs.getInt("DELAY")
@@ -56,10 +59,10 @@ public class RouteDaoImpl implements RouteDao {
     public Route findRouteByIdSQL(Long id) {
         String sql = "SELECT * FROM routes r WHERE r.id = " + id;
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
-                new Route(rs.getLong("ID"),
-                        rs.getLong("ID_START_AIRPORT"),
-                        rs.getLong("ID_DESTINATION_AIRPORT"),
-                        rs.getLong("ID_PLANE"),
+                new Route(id,
+                        airportDao.findAirportByIdSQL(rs.getLong("ID_START_AIRPORT")),
+                        airportDao.findAirportByIdSQL(rs.getLong("ID_DESTINATION_AIRPORT")),
+                        planeDao.findPlaneByIdSQL(rs.getLong("ID_PLANE")),
                         rs.getTimestamp("DATETIME_DEPARTURE").toLocalDateTime(),
                         rs.getTimestamp("DATETIME_ARRIVAL").toLocalDateTime(),
                         rs.getInt("DELAY")

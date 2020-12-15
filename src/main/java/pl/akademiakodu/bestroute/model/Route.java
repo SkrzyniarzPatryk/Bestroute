@@ -9,21 +9,13 @@ import java.time.LocalTime;
 
 public class Route {
     private Long id;
-
     private Airport startAirport;
-    private Long idStartAirport;
-
     private Airport destinationAirport;
-    private Long idDestinationAirport;
-
     private Plane plane;
-    private Long idPlane;
-
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
     private Integer delay;
     private String name;
-    private static Long index = 1l;
 
     public Route(Airport startAirport, Airport destinationAirport, LocalDateTime departureDate,
                  LocalDateTime arrivalDate, Integer delay, Plane plane) {
@@ -33,16 +25,17 @@ public class Route {
         this.arrivalDate = arrivalDate;
         this.delay = delay;
         this.plane = plane;
-        id = index++;
         makeName();
     }
 
     //==--DO SQL
-    public Route(Long id, Long idStartAirport, Long idDestinationAirport, Long idPlane, LocalDateTime departureDate, LocalDateTime arrivalDate, Integer delay) {
+
+
+    public Route(Long id, Airport startAirport, Airport destinationAirport, Plane plane, LocalDateTime departureDate, LocalDateTime arrivalDate, Integer delay) {
         this.id = id;
-        this.idStartAirport = idStartAirport;
-        this.idDestinationAirport = idDestinationAirport;
-        this.idPlane = idPlane;
+        this.startAirport = startAirport;
+        this.destinationAirport = destinationAirport;
+        this.plane = plane;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.delay = delay;
@@ -123,48 +116,14 @@ public class Route {
         this.name = name;
     }
 
-    public Long getIdStartAirport() {
-        return idStartAirport;
-    }
-
-    public void setIdStartAirport(Long idStartAirport) {
-        this.idStartAirport = idStartAirport;
-    }
-
-    public Long getIdDestinationAirport() {
-        return idDestinationAirport;
-    }
-
-    public void setIdDestinationAirport(Long idDestinationAirport) {
-        this.idDestinationAirport = idDestinationAirport;
-    }
-
-    public Long getIdPlane() {
-        return idPlane;
-    }
-
-    public void setIdPlane(Long idPlane) {
-        this.idPlane = idPlane;
-    }
-
-    public static Long getIndex() {
-        return index;
-    }
-
-    public static void setIndex(Long index) {
-        Route.index = index;
-    }
 
     @Override
     public String toString() {
         return "Route{" +
                 "id=" + id +
                 ", startAirport=" + startAirport +
-                ", idStartAirport=" + idStartAirport +
                 ", destinationAirport=" + destinationAirport +
-                ", idDestinationAirport=" + idDestinationAirport +
                 ", plane=" + plane +
-                ", idPlane=" + idPlane +
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
                 ", delay=" + delay +

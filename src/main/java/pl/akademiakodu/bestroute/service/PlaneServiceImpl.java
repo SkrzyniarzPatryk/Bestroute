@@ -2,6 +2,7 @@ package pl.akademiakodu.bestroute.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.akademiakodu.bestroute.model.Comfort;
 import pl.akademiakodu.bestroute.model.Plane;
 import pl.akademiakodu.bestroute.repository.PlaneDao;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 public class PlaneServiceImpl implements PlaneService {
-    List<Plane> planeList;
+    private List<Plane> planeList;
     private PlaneDao planeDao;
 
     @Autowired
@@ -19,13 +20,15 @@ public class PlaneServiceImpl implements PlaneService {
 
         this.planeDao = planeDao;
         createPlanes();
-        List<Plane> planeList = new ArrayList<>();
-        planeList = planeDao.findAllPlanes();
-        for (Plane plane : planeList) {
-            System.out.println(plane );
-        }
-        System.out.println("Plane serwis - kończę");
-
+      //  List<Plane> planeList = new ArrayList<>();
+    //    planeList = planeDao.findAllPlanes();
+//        for (Plane plane : planeList) {
+//            System.out.println(plane );
+//        }
+//        System.out.println("Plane serwis - kończę");
+       // System.out.println(this.planeList.get(0).getComfort().getName());
+        //planeDao.createPlane(new Plane(2l, "ptak2", Comfort.ECONOMIC_CLASS));
+       // System.out.println(planeDao.findPlaneByNameSQL("ptak1").getComfort().getName());
     }
 
     @Override
@@ -40,7 +43,7 @@ public class PlaneServiceImpl implements PlaneService {
 
     private void createPlanes() {
         planeList = new ArrayList<>();
-        planeList.add(new Plane("Boeing 747", "Klasa Ekonomiczna"));
-        planeList.add(new Plane("Saab 307", "Klasa Biznesowa"));
+        planeList.add(new Plane(1l, "Boeing 747", Comfort.BUSSINES_CLASS));
+        planeList.add(new Plane(2l, "Saab 307", Comfort.ECONOMIC_CLASS));
     }
 }

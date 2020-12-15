@@ -3,6 +3,7 @@ package pl.akademiakodu.bestroute.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.bestroute.model.Airport;
+import pl.akademiakodu.bestroute.model.Country;
 import pl.akademiakodu.bestroute.repository.AirportDao;
 
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ public class AirportServiceImpl implements AirportService {
         System.out.println("Airport Serwis - zaczynam");
         this.airportDao = airportDao;
         createAirports();
-        List<Airport> airportList = new ArrayList<>();
-        airportList = airportDao.findAllAirports();
-        for (Airport airport : airportList) {
-            System.out.println(airport);
-        }
+//        List<Airport> airportList = new ArrayList<>();
+//        airportList = airportDao.findAllAirports();
+//        for (Airport airport : airportList) {
+//            System.out.println(airport);
+//        }
         System.out.println("airport Serwis - kończe");
     }
 
@@ -33,8 +34,8 @@ public class AirportServiceImpl implements AirportService {
 
     private void createAirports() {
         airportList = new ArrayList<>();
-        airportList.add(new Airport("Poland", "Warszawa Okęcie"));
-        airportList.add(new Airport("Poland", "Kraków Balice"));
-        airportList.add(new Airport("Poland", "Modlin"));
+        airportList.add(new Airport(1l, Country.POLAND, "Warszawa Okęcie"));
+        airportList.add(new Airport(2l, Country.POLAND, "Kraków Balice"));
+        airportList.add(new Airport(3l, Country.POLAND, "Modlin"));
     }
 }

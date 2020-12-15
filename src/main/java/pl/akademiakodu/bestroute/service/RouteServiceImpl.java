@@ -26,11 +26,11 @@ public class RouteServiceImpl implements RouteService {
         this.airportService = airportService;
         createRouteList();
         this.routeDao = routeDao;
-        List<Route> routeList = new ArrayList<>();
-        routeList = routeDao.findAllRoutes();
-        for (Route route : routeList) {
-            System.out.println(route);
-        }
+//        List<Route> routeList = new ArrayList<>();
+//        routeList = routeDao.findAllRoutes();
+//        for (Route route : routeList) {
+//            System.out.println(route);
+//        }
         System.out.println("Route Serwis - kończe");
     }
 
@@ -60,12 +60,6 @@ public class RouteServiceImpl implements RouteService {
     //create
     private void createRouteList() {
         routeList = new ArrayList<>();
-        routeList.add(new Route(12l, 4l, 5l, 2l, LocalDateTime.of(2020, 12, 12, 1, 2, 2),
-                LocalDateTime.of(2020, 2, 1, 12, 1, 2),
-                23));
-        routeList.add(new Route(18l, 5l, 6l, 2l, LocalDateTime.of(2020, 12, 12, 1, 2, 2),
-                LocalDateTime.of(2020, 2, 1, 12, 1, 2),
-                23));
         routeList.add(new Route(airportService.findAirportById(1l), airportService.findAirportById(2l),
                 LocalDateTime.of(2020, 12, 29, 12, 00),
                 LocalDateTime.of(2020, 12, 29, 13, 00),
