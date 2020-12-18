@@ -27,13 +27,10 @@ public class RouteController {
     @GetMapping("/")
     public String home(Model model, @RequestParam(required = false) String start_airport, @RequestParam(required = false) String end_airport,
                        @RequestParam(required = false) String from_date, @RequestParam(required = false) String to_date, @RequestParam(required = false) String comfort) {
-        Form form = new Form();
         if (start_airport == null) {
             model.addAttribute("routeList", routeService.getRoutes());
-            model.addAttribute("formu", form);
         } else {
             model.addAttribute("routeList", routeService.searchRoutesByAirport(start_airport, end_airport, from_date, to_date, comfort));
-            model.addAttribute("formu", form);
         }
         return "home";
     }
@@ -58,14 +55,6 @@ public class RouteController {
     }
 
 
-
-    @PostMapping("/")
-    public String test1(Model model, @ModelAttribute Form form1){
-        Form form = new Form();
-        model.addAttribute("routeList", routeService.getRoutes());
-        model.addAttribute("formu", form);
-        return "home";
-    }
     @GetMapping("/route/details/{id}")
     public String getRoute(Model model, @PathVariable Long id) {
         model.addAttribute("route", routeService.findRouteById(id));
