@@ -17,16 +17,16 @@ public class Route {
     private Integer delay;
     private String name;
 
-    public Route(Airport startAirport, Airport destinationAirport, LocalDateTime departureDate,
-                 LocalDateTime arrivalDate, Integer delay, Plane plane) {
-        this.startAirport = startAirport;
-        this.destinationAirport = destinationAirport;
-        this.departureDate = departureDate;
-        this.arrivalDate = arrivalDate;
-        this.delay = delay;
-        this.plane = plane;
-        makeName();
-    }
+//    public Route(Airport startAirport, Airport destinationAirport, LocalDateTime departureDate,
+//                 LocalDateTime arrivalDate, Integer delay, Plane plane) {
+//        this.startAirport = startAirport;
+//        this.destinationAirport = destinationAirport;
+//        this.departureDate = departureDate;
+//        this.arrivalDate = arrivalDate;
+//        this.delay = delay;
+//        this.plane = plane;
+//        makeName();
+//    }
 
     //==--DO SQL
 
@@ -39,6 +39,9 @@ public class Route {
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.delay = delay;
+    }
+
+    public Route() {
     }
 
     public String getDetailsUrl() {

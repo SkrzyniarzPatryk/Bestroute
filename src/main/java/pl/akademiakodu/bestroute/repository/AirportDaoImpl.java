@@ -14,11 +14,7 @@ public class AirportDaoImpl implements AirportDao {
 
     @Autowired
     public AirportDaoImpl(JdbcTemplate jdbcTemplate) {
-        System.out.println("Baza - zaczynam");
-
         this.jdbcTemplate = jdbcTemplate;
-        System.out.println("Baza - kończe");
-
     }
 
     @Override
@@ -33,8 +29,8 @@ public class AirportDaoImpl implements AirportDao {
 
         List<Airport> airportList = jdbcTemplate.query(sql, (rs, rowNuw) ->
                 new Airport(rs.getLong("ID"),
-                        Country.valueOf(rs.getString("NAME")),
-                        rs.getString("COUNTRY")
+                        Country.valueOf(rs.getString("COUNTRY")),
+                        rs.getString("NAME")
                 ));
         return airportList;
     }
@@ -55,8 +51,8 @@ public class AirportDaoImpl implements AirportDao {
         String sql = "SELECT * FROM airports a WHERE a.name = '" + name + "'";
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Airport(rs.getLong("ID"),
-                        Country.valueOf(rs.getString("NAME")),
-                        rs.getString("COUNTRY")
+                        Country.valueOf(rs.getString("COUNTRY")),
+                        rs.getString("NAME")
                 ));
     }
 
@@ -65,8 +61,8 @@ public class AirportDaoImpl implements AirportDao {
         String sql = "SELECT * FROM airports a WHERE a.id = " + id;
         return jdbcTemplate.queryForObject(sql, (rs, rowNum) ->
                 new Airport(rs.getLong("ID"),
-                        Country.valueOf(rs.getString("NAME")),
-                        rs.getString("COUNTRY")
+                        Country.valueOf(rs.getString("COUNTRY")),
+                        rs.getString("NAME")
                 ));
     }
 }

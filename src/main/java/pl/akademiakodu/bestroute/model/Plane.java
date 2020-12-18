@@ -3,7 +3,7 @@ package pl.akademiakodu.bestroute.model;
 public class Plane {
     private Long id;
     private String name;
-    private String nameUrl;
+//    private String nameUrl;
     private Comfort comfort;
 
     //ToSql
@@ -13,17 +13,20 @@ public class Plane {
         this.comfort = comfort;
     }
 
+    public Plane() {
+    }
+
     public String getDetailsPlane() {
         return "/plane/details/" + id;
     }
     public String getPlaneImage() {
-        return "/plane/" + nameUrl + "jpg";
+        return "/plane/" + name + "jpg";
     }
 
     //==--Private method--==
-    private void makeName() {
-        nameUrl = Funcion.getNameWithoutSpace(name);
-    }
+//    private void makeName() {
+//        nameUrl = Funcion.getNameWithoutSpace(name);
+ //  }
     //==--GettersAndSetters--==
     public Long getId() {
         return id;
@@ -41,14 +44,14 @@ public class Plane {
         this.name = name;
     }
 
-    public String getNameUrl() {
-        return nameUrl;
-    }
-
-
-    public void setNameUrl(String nameUrl) {
-        this.nameUrl = nameUrl;
-    }
+//    public String getNameUrl() {
+//        return nameUrl;
+//    }
+//
+//
+//    public void setNameUrl(String nameUrl) {
+//        this.nameUrl = nameUrl;
+//    }
 
     public Comfort getComfort() {
         return comfort;
@@ -63,7 +66,7 @@ public class Plane {
         return "Plane{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", nameUrl='" + nameUrl + '\'' +
+              //  ", nameUrl='" + nameUrl + '\'' +
                 ", comfort='" + comfort + '\'' +
                 '}';
     }

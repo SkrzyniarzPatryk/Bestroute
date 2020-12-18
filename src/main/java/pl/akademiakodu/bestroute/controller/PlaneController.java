@@ -3,9 +3,8 @@ package pl.akademiakodu.bestroute.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import pl.akademiakodu.bestroute.model.Plane;
 import pl.akademiakodu.bestroute.service.PlaneService;
 
 @Controller
@@ -23,5 +22,12 @@ public class PlaneController {
     public String getDetailsPlane(Model model, @PathVariable Long id) {
         model.addAttribute("plane", planeService.findPlaneById(id));
         return "plane_details";
+    }
+    @PostMapping("/create")
+    public String addPlane (@ModelAttribute Plane plane) {
+        if (planeService.isPlaneLegit(plane)) {
+            planeService.addPlane(plane);
+        }
+        return "redirect:/creator";
     }
 }

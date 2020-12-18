@@ -11,31 +11,57 @@ import java.util.List;
 
 @Service
 public class AirportServiceImpl implements AirportService {
-    List<Airport> airportList;
+   // List<Airport> airportList;
     private AirportDao airportDao;
 
     @Autowired
     public AirportServiceImpl(AirportDao airportDao) {
-        System.out.println("Airport Serwis - zaczynam");
         this.airportDao = airportDao;
-        createAirports();
+//        createAirports();
 //        List<Airport> airportList = new ArrayList<>();
 //        airportList = airportDao.findAllAirports();
 //        for (Airport airport : airportList) {
 //            System.out.println(airport);
 //        }
-        System.out.println("airport Serwis - kończe");
     }
 
+    @Override
+    public List<Airport> getAirports() {
+        return airportDao.findAllAirports();
+    }
+
+    @Override
+    public void addAirport(Airport airport) {
+        airportDao.createAirport(airport);
+    }
+
+    @Override
+    public boolean isAirportLegit(Airport airport) {
+        if (airport.getName().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public Airport findAirportById(Long id) {
-        return airportList.stream().filter(airport -> airport.getId() == id).findFirst().get();
+        return airportDao.findAirportByIdSQL(id);
+    }
+    @Override
+    public Airport findAirportByName(String name) {
+        return airportDao.findAirportByNameSQL(name);
     }
 
 
-    private void createAirports() {
-        airportList = new ArrayList<>();
-        airportList.add(new Airport(1l, Country.POLAND, "Warszawa Okęcie"));
-        airportList.add(new Airport(2l, Country.POLAND, "Kraków Balice"));
-        airportList.add(new Airport(3l, Country.POLAND, "Modlin"));
-    }
+//    private void createAirports() {
+//        airportDao.createAirport(new Airport(1l, Country.POLAND, "Warszawa Okęcie"));
+//        airportDao.createAirport(new Airport(2l, Country.POLAND, "Kraków Balice"));
+//        airportDao.createAirport(new Airport(3l, Country.POLAND, "Modlin"));
+//        airportDao.createAirport(new Airport(4l, Country.DEUTSCHLAND, "Frankfurt"));
+//
+////        airportList = new ArrayList<>();
+////        airportList.add(new Airport(1l, Country.POLAND, "Warszawa Okęcie"));
+////        airportList.add(new Airport(2l, Country.POLAND, "Kraków Balice"));
+////        airportList.add(new Airport(3l, Country.POLAND, "Modlin"));
+//    }
 }

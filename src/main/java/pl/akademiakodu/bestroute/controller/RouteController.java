@@ -4,32 +4,67 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.akademiakodu.bestroute.model.Airport;
+import pl.akademiakodu.bestroute.model.Plane;
 import pl.akademiakodu.bestroute.model.Route;
+import pl.akademiakodu.bestroute.service.AirportService;
+import pl.akademiakodu.bestroute.service.PlaneService;
 import pl.akademiakodu.bestroute.service.RouteService;
 
 @Controller
 public class RouteController {
     RouteService routeService;
+    PlaneService planeService;
+    AirportService airportService;
 
     @Autowired
-    public RouteController(RouteService routeService) {
+    public RouteController(RouteService routeService, PlaneService planeService, AirportService airportService) {
         this.routeService = routeService;
-        System.out.println("kontroller tras");
+        this.airportService = airportService;
+        this.planeService = planeService;
     }
 
     @GetMapping("/")
-    public String home(Model model, @RequestParam(required = false) String search_route) {
-        if (search_route == null) {
+    public String home(Model model, @RequestParam(required = false) String start_airport, @RequestParam(required = false) String end_airport,
+                       @RequestParam(required = false) String from_date, @RequestParam(required = false) String to_date, @RequestParam(required = false) String comfort) {
+        Form form = new Form();
+        if (start_airport == null) {
             model.addAttribute("routeList", routeService.getRoutes());
+            model.addAttribute("formu", form);
         } else {
-            model.addAttribute("routeList", routeService.searchRoutesByAirport(search_route));
+            model.addAttribute("routeList", routeService.searchRoutesByAirport(start_airport, end_airport, from_date, to_date, comfort));
+            model.addAttribute("formu", form);
         }
         return "home";
     }
-    @PostMapping("/test/{id}")
-    public String test(@ModelAttribute Route route, @PathVariable Long id){
+    @GetMapping("/creator")
+    public String creator(Model model) {
+        Airport airport = new Airport();
+        Plane plane = new Plane();
+        Route route = new Route();
+        model.addAttribute("airport", airport);
+        model.addAttribute("plane", plane);
+        model.addAttribute("route", route);
+        model.addAttribute("airportList", airportService.getAirports());
+        model.addAttribute("planeList", planeService.getPlanes());
+        return "creator";
+    }
+    @PostMapping("/route/create")
+    public String addRoute(@ModelAttribute Route route) {
+        if (routeService.isRouteLegit(route)) {
+            routeService.addRoute(route);
+        }
+        return "redirect:/creator";
+    }
 
-        return "redirect /";
+
+
+    @PostMapping("/")
+    public String test1(Model model, @ModelAttribute Form form1){
+        Form form = new Form();
+        model.addAttribute("routeList", routeService.getRoutes());
+        model.addAttribute("formu", form);
+        return "home";
     }
     @GetMapping("/route/details/{id}")
     public String getRoute(Model model, @PathVariable Long id) {

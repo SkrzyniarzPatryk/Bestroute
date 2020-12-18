@@ -12,6 +12,9 @@ public class Airport {
         this.country = country;
     }
 
+    public Airport() {
+    }
+
     //==--GettersAndSetters--==
     public Long getId() {
         return id;
