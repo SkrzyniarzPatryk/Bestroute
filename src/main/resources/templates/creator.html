@@ -11,7 +11,7 @@
     <ul>
         <li><a th:href="@{/}">Home</a></li>
         <li><a th:href="@{/favorite}">Favorite</a></li>
-        <li><a href="http://www.google.pl">Przycisk 3</a></li>
+        <li><a th:href="@{/creator}">Creator</a></li>
     </ul>
 </nav>
 <div>
@@ -29,8 +29,8 @@
     <h1>Plane crator</h1>
     <form th:action="@{/plane/create}" th:object="${plane}" method="post">
         <select th:field="*{comfort}">
-            <option th:each="comfor : ${T(pl.akademiakodu.bestroute.model.Comfort).values()}"
-                    th:value="${comfor}" th:text="${comfor.getName()}"></option>
+            <option th:each="comfort : ${T(pl.akademiakodu.bestroute.model.Comfort).values()}"
+                    th:value="${comfort}" th:text="${comfort.getName()}"></option>
         </select>
         <input th:field="*{name}" type="text">
         <input type="submit">
@@ -41,15 +41,15 @@
     <form th:action="@{/route/create}" th:object="${route}" method="post">
         <select th:field="*{startAirport}">
             <option th:each="airport : ${airportList}"
-                    th:value="${airport}" th:text="${airport.getName()}"></option>
+                    th:value="${airport.id}" th:text="${airport.getName()}"></option>
         </select>
         <select th:field="*{destinationAirport}">
             <option th:each="airport : ${airportList}"
-                    th:value="${airport}" th:text="${airport.getName()}"></option>
+                    th:value="${airport.id}" th:text="${airport.getName()}"></option>
         </select>
         <select th:field="*{plane}">
             <option th:each="plane : ${planeList}"
-                    th:value="${plane}" th:text="${plane.getName()}"></option>
+                    th:value="${plane.id}" th:text="${plane.getName()}"></option>
         </select>
         <input th:field="*{departureDate}" type="datetime-local">
         <input th:field="*{arrivalDate}" type="datetime-local">
