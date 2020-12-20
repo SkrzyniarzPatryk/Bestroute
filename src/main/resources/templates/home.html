@@ -77,7 +77,7 @@
                 <td>
                     <a th:href="${route.getDetailsUrl()}"><button class="btn btn-primary">Detail</button></a>
                     <a th:href="@{'/favorite/change/' + ${route.id} + '?path=h'}">
-                        <button class="btn btn-primary" name="ehdh"></button>
+                        <button class="btn btn-primary">Add to favorite</button>
                     </a>
                     <a th:href="@{'/route/editor/' + ${route.id}}"><button class="btn btn-primary">Edit!</button></a>
                 </td>
