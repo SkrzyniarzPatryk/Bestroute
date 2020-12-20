@@ -7,56 +7,105 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/favorite}">Favorite</a></li>
-        <li><a th:href="@{/creator}">Creator</a></li>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <span class="navbar-brand">BEST ROUTE</span>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/favorite}">Favorite</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/creator}">Creator</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/destroyer}">Destroyer</a>
+        </li>
     </ul>
 </nav>
 <div>
     <h1>Airport creator</h1>
-    <form th:action="@{/airport/create}" th:object="${airport}" method="post">
-        <select th:field="*{country}">
-            <option th:each="country : ${T(pl.akademiakodu.bestroute.model.Country).values()}"
-                    th:value="${country}" th:text="${country.getName()}"></option>
-        </select>
-        <input th:field="*{name}" type="text">
-        <input type="submit">
+    <form th:action="@{/airport/create}" th:object="${airport}" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label for="1" class="form-label">Select country</label>
+            <select th:field="*{country}" id="1" class="form-select">
+                <option th:each="country : ${T(pl.akademiakodu.bestroute.model.Country).values()}"
+                        th:value="${country}" th:text="${country.name}"></option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="2" class="form-label">Enter the name of the airport</label>
+            <input th:field="*{name}" type="text" id="2" class="form-control">
+        </div>
+        <div class="col-12">
+            <input type="submit" value="Create!" class="btn btn-primary">
+        </div>
     </form>
 </div>
+<hr>
 <div>
-    <h1>Plane crator</h1>
-    <form th:action="@{/plane/create}" th:object="${plane}" method="post">
-        <select th:field="*{comfort}">
-            <option th:each="comfort : ${T(pl.akademiakodu.bestroute.model.Comfort).values()}"
-                    th:value="${comfort}" th:text="${comfort.getName()}"></option>
-        </select>
-        <input th:field="*{name}" type="text">
-        <input type="submit">
+    <h1>Plane creator</h1>
+    <form th:action="@{/plane/create}" th:object="${plane}" method="post" class="row g-3">
+        <div class="col md-6">
+            <label for="3" class="form-label">Select comfort</label>
+            <select th:field="*{comfort}" id="3" class="form-select">
+                <option th:each="comfort : ${T(pl.akademiakodu.bestroute.model.Comfort).values()}"
+                        th:value="${comfort}" th:text="${comfort.name}"></option>
+            </select>
+        </div>
+        <div class="col md-6">
+            <label for="4" class="form-label">Enter the name of the plane</label>
+            <input th:field="*{name}" type="text" class="form-control" id="4">
+        </div>
+        <div class="col-12">
+            <input type="submit" value="Create!" class="btn btn-primary">
+        </div>
     </form>
 </div>
+<hr>
 <div>
     <h1>Route creator</h1>
-    <form th:action="@{/route/create}" th:object="${route}" method="post">
-        <select th:field="*{startAirport}">
-            <option th:each="airport : ${airportList}"
-                    th:value="${airport.id}" th:text="${airport.getName()}"></option>
-        </select>
-        <select th:field="*{destinationAirport}">
-            <option th:each="airport : ${airportList}"
-                    th:value="${airport.id}" th:text="${airport.getName()}"></option>
-        </select>
-        <select th:field="*{plane}">
+    <form th:action="@{/route/create}" th:object="${route}" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label for="5" class="form-label">Select airport where route start</label>
+            <select name="startAirportId" id="5" class="form-select">
+                <option th:each="airport : ${airportList}"
+                        th:value="${airport.id}" th:text="${airport.name}"></option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="6" class="form-label">Select airport where route end</label>
+            <select name="destinationAirportId" id="6" class="form-select">
+                <option th:each="airport : ${airportList}"
+                        th:value="${airport.id}" th:text="${airport.name}"></option>
+            </select>
+        </div>
+        <div class="col-md-6">
+        <label for="7" class="form-label">Select flight plane</label>
+        <select name="planeId" id="7" class="form-select">
             <option th:each="plane : ${planeList}"
-                    th:value="${plane.id}" th:text="${plane.getName()}"></option>
+                    th:value="${plane.id}" th:text="${plane.name}"></option>
         </select>
-        <input th:field="*{departureDate}" type="datetime-local">
-        <input th:field="*{arrivalDate}" type="datetime-local">
-        <input th:field="*{delay}" type="number">
-        <input type="submit">
+        </div>
+        <div class="col-md-6">
+            <label for="8" class="form-label">Enter start date</label>
+            <input th:field="*{departureDate}" type="datetime-local" id="8" class="form-select">
+        </div>
+        <div class="col-md-6">
+            <label for="9" class="form-label">Enter end date</label>
+            <input th:field="*{arrivalDate}" type="datetime-local" id="9" class="form-select">
+        </div>
+        <div class="col-md-6">
+            <label for="10" class="form-label">Enter a delay</label>
+            <input th:field="*{delay}" type="number" id="10" class="form-control">
+        </div>
+        <div class="col-12">
+            <input type="submit" value="Create!" class="btn btn-primary">
+        </div>
     </form>
 </div>
+<hr>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>

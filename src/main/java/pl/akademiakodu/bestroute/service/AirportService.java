@@ -11,4 +11,6 @@ public interface AirportService {
      List<Airport> getAirports();
      void addAirport(Airport airport);
      boolean isAirportLegit(Airport airport);
+     void removeAirport(Long id);
+
 }

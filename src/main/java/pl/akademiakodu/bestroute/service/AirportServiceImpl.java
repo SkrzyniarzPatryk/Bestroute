@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.bestroute.model.Airport;
 import pl.akademiakodu.bestroute.model.Country;
+import pl.akademiakodu.bestroute.model.Route;
 import pl.akademiakodu.bestroute.repository.AirportDao;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class AirportServiceImpl implements AirportService {
     @Autowired
     public AirportServiceImpl(AirportDao airportDao) {
         this.airportDao = airportDao;
+
+
 //        createAirports();
 //        List<Airport> airportList = new ArrayList<>();
 //        airportList = airportDao.findAllAirports();
@@ -41,6 +44,11 @@ public class AirportServiceImpl implements AirportService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void removeAirport(Long id) {
+        airportDao.deleteAirport(id);
     }
 
     @Override

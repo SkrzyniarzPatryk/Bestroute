@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona startowa</title>
+    <link rel="stylesheet" th:href="@{/app.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <span class="navbar-brand">BEST ROUTE</span>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/favorite}">Favorite</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/creator}">Creator</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/destroyer}">Destroyer</a>
+        </li>
+    </ul>
+</nav>
+<div>
+    <h1>Edit route:</h1>
+    <form th:action="@{/route/edit/{id}(id=${route.getId()})}" th:object="${route}" method="post" class="row g-3">
+        <div class="col-md-4">
+            <label for="1" class="form-label">Select start airport</label>
+            <select name="startAirportId" id="1" class="form-select">
+                <option th:each="airport : ${airportList}"
+                        th:value="${airport.id}" th:text="${airport.name}"></option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="2" class="form-label">Select end airport</label>
+            <select name="destinationAirportId" id="2" class="form-select">
+                <option th:each="airport : ${airportList}"
+                        th:value="${airport.id}" th:text="${airport.name}"></option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="3" class="form-label">Select plane</label>
+            <select name="planeId" id="3" class="form-select">
+                <option th:each="plane : ${planeList}"
+                        th:value="${plane.id}">
+                    <span th:text="${plane.name}"/> (<span th:text="${plane.comfort.name}"/>)
+                </option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="4" class="form-label">Select start date</label>
+            <input th:field="*{departureDate}" type="datetime-local" id="4" class="form-select">
+        </div>
+        <div class="col-md-4">
+            <label for="5" class="form-label">Select end date</label>
+            <input th:field="*{arrivalDate}" type="datetime-local" id="5" class="form-select">
+        </div>
+        <div class="col-md-4">
+            <label for="6" class="form-label">Select delay</label>
+            <input th:field="*{delay}" type="number" id="6" class="form-control">
+        </div>
+        <div class="col-12">
+            <input type="submit" value="Edit it!" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+<hr>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+</html>

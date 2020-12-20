@@ -20,7 +20,7 @@ public class Plane {
         return "/plane/details/" + id;
     }
     public String getPlaneImage() {
-        return "/plane/" + name + "jpg";
+        return "/plane_img/" + name.replace(' ', '_') + ".jpg";
     }
 
     //==--Private method--==

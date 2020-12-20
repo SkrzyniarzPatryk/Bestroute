@@ -32,8 +32,24 @@ public class RouteController {
         } else {
             model.addAttribute("routeList", routeService.searchRoutesByAirport(start_airport, end_airport, from_date, to_date, comfort));
         }
+        model.addAttribute("favorites", routeService.getFavoriteRoutes());
         return "home";
     }
+    @GetMapping("/favorite")
+    public String getFavorites(Model model) {
+        model.addAttribute("favorites", routeService.getFavoriteRoutes());
+        return "favorites";
+    }
+    @GetMapping("/favorite/change/{id}")
+    public String changeFavorites(@PathVariable Long id, @RequestParam String path) {
+        routeService.changeFavorite(id);
+        if (path.equals("f")) {
+            return "redirect:/favorite";
+        }
+        return "redirect:/";
+
+    }
+
     @GetMapping("/creator")
     public String creator(Model model) {
         Airport airport = new Airport();
@@ -44,20 +60,58 @@ public class RouteController {
         model.addAttribute("route", route);
         model.addAttribute("airportList", airportService.getAirports());
         model.addAttribute("planeList", planeService.getPlanes());
+        System.out.println(route.getArrivalDate());
         return "creator";
     }
+    @GetMapping("/destroyer")
+    public String destroyer(Model model) {
+        model.addAttribute("routeList", routeService.getRoutes());
+        model.addAttribute("airportList", airportService.getAirports());
+        model.addAttribute("planeList", planeService.getPlanes());
+        return "destroyer";
+    }
     @PostMapping("/route/create")
-    public String addRoute(@ModelAttribute Route route) {
+    public String addRoute(@ModelAttribute Route route, @RequestParam Long planeId
+            , @RequestParam Long startAirportId
+            , @RequestParam Long destinationAirportId) {
+
+        route.setStartAirport(airportService.findAirportById(startAirportId));
+        route.setDestinationAirport(airportService.findAirportById(destinationAirportId));
+        route.setPlane(planeService.findPlaneById(planeId));
         if (routeService.isRouteLegit(route)) {
             routeService.addRoute(route);
         }
         return "redirect:/creator";
     }
-
+    @PostMapping("/route/destroy")
+    public String removeRoute(@RequestParam Long idRoute) {
+        routeService.removeRoute(idRoute);
+        return "redirect:/destroyer";
+    }
 
     @GetMapping("/route/details/{id}")
     public String getRoute(Model model, @PathVariable Long id) {
         model.addAttribute("route", routeService.findRouteById(id));
         return "route_details";
+    }
+
+    @GetMapping("/route/editor/{id}")
+    public String editorRoute(Model model, @PathVariable Long id) {
+        model.addAttribute("route", routeService.findRouteById(id));
+        model.addAttribute("airportList", airportService.getAirports());
+        model.addAttribute("planeList", planeService.getPlanes());
+        return "route_editor";
+    }
+    @PostMapping("/route/edit/{id}")
+    public String editRoute(@ModelAttribute Route route, @RequestParam Long planeId
+            , @RequestParam Long startAirportId
+            , @RequestParam Long destinationAirportId, @PathVariable Long id) {
+
+        route.setStartAirport(airportService.findAirportById(startAirportId));
+        route.setDestinationAirport(airportService.findAirportById(destinationAirportId));
+        route.setPlane(planeService.findPlaneById(planeId));
+        route.setId(id);
+        routeService.editRoute(route);
+        return "redirect:/route/editor/" + id;
     }
 }

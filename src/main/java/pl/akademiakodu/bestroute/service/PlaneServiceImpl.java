@@ -3,8 +3,10 @@ package pl.akademiakodu.bestroute.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.bestroute.model.Plane;
+import pl.akademiakodu.bestroute.model.Route;
 import pl.akademiakodu.bestroute.repository.PlaneDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,6 +17,7 @@ public class PlaneServiceImpl implements PlaneService {
     @Autowired
     public PlaneServiceImpl(PlaneDao planeDao) {
         this.planeDao = planeDao;
+
        // createPlanes();
       //  List<Plane> planeList = new ArrayList<>();
     //    planeList = planeDao.findAllPlanes();
@@ -52,6 +55,11 @@ public class PlaneServiceImpl implements PlaneService {
     @Override
     public void addPlane(Plane plane) {
         planeDao.createPlane(plane);
+    }
+
+    @Override
+    public void removePlane(Long idPlane) {
+        planeDao.deletePlane(idPlane);
     }
 
 //    private void createPlanes() {

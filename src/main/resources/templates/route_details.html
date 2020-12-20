@@ -4,21 +4,57 @@
     <meta charset="UTF-8">
     <title>Strona startowa</title>
     <link rel="stylesheet" th:href="@{/app.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
 <body>
-<nav>
-    <ul>
-        <li><a th:href="@{/}">Home</a></li>
-        <li><a th:href="@{/favorite}">Favorite</a></li>
-        <li><a th:href="@{/creator}">Creator</a></li>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <span class="navbar-brand">BEST ROUTE</span>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/favorite}">Favorite</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/creator}">Creator</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/destroyer}">Destroyer</a>
+        </li>
     </ul>
 </nav>
-<div>
-    <p th:text="${route.getName()}"></p>
-    <p th:text="${route.getDepartureDate()}"></p>
-    <p th:text="${route.getArrivalDate()}"></p>
-    <a th:href="${route.getPlane().getDetailsPlane()}"><p th:text="${route.getPlane().getName()}"></p></a>
-    <p th:text="${route.getDelay()}"></p>
+<div class="row g-3">
+    <div class="card" style="width: 18rem; margin: 20px;">
+        <img th:src="${route.startAirport.getAirportImage()}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Start airport</h5>
+            <p class="card-text" th:text="'Name: ' + ${route.startAirport.name}"></p>
+            <a th:href="${route.startAirport.getDetailsAirport()}" class="btn btn-primary">Go to airport</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem; margin: 20px;">
+        <img th:src="${route.destinationAirport.getAirportImage()}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Destination airport</h5>
+            <p class="card-text" th:text="'Name: ' + ${route.destinationAirport.name}"></p>
+            <a th:href="${route.destinationAirport.getDetailsAirport()}" class="btn btn-primary">Go to airport</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem; margin: 20px;">
+        <img th:src="${route.plane.getPlaneImage()}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Plane</h5>
+            <p class="card-text" th:text="'Name: ' + ${route.plane.name}"></p>
+            <a th:href="${route.plane.getDetailsPlane()}" class="btn btn-primary">Go to plane></a>
+        </div>
+    </div>
 </div>
+<hr>
+<p th:text="'Planing departure date: ' + ${route.getDepartureDateFormat('s')}"></p>
+<p th:text="'Planing arrival date: ' + ${route.getArrivalDateFormat('s')}"></p>
+<p th:text="'Possible delay: ' + ${route.delay} + 'min'"></p>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
 </html>

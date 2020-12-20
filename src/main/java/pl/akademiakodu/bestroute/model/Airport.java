@@ -14,6 +14,12 @@ public class Airport {
 
     public Airport() {
     }
+    public String getAirportImage() {
+        return "/airport_img/" + name.replace(' ', '_') + ".jpg";
+    }
+    public String getDetailsAirport() {
+        return "/airport/details/" + id;
+    }
 
     //==--GettersAndSetters--==
     public Long getId() {

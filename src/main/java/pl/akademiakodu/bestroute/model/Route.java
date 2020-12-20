@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Route {
     private Long id;
@@ -39,6 +40,7 @@ public class Route {
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.delay = delay;
+        makeName();
     }
 
     public Route() {
@@ -79,21 +81,60 @@ public class Route {
         this.destinationAirport = destinationAirport;
     }
 
-    public LocalDateTime getDepartureDate() {
+
+
+
+
+
+    public String getDepartureDate() {
+        if (arrivalDate != null) {
+            return departureDate.toString();
+        }
+        return "";
+    }
+    public LocalDateTime getDepartureDateLocal() {
         return departureDate;
     }
 
-    public void setDepartureDate(LocalDateTime departureDate) {
-        this.departureDate = departureDate;
+    public String getDepartureDateFormat(char c) {
+        LocalDateTime ldt = departureDate;
+        if (c == 'f') {
+            ldt = ldt.plusMinutes(delay);
+        }
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return ldt.format(dtf);
+    }
+    public String getArrivalDateFormat(char c) {
+        LocalDateTime ldt = arrivalDate;
+        if (c == 'f') {
+            ldt = ldt.plusMinutes(delay);
+        }
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return ldt.format(dtf);
     }
 
-    public LocalDateTime getArrivalDate() {
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = LocalDateTime.parse(departureDate);
+    }
+
+    public String getArrivalDate() {
+        if (arrivalDate != null) {
+            return arrivalDate.toString();
+        }
+        return "";
+    }
+
+    public LocalDateTime getArrivalDateLocal() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(LocalDateTime arrivalDate) {
-        this.arrivalDate = arrivalDate;
+    public void setArrivalDate(String arrivalDate) {
+        this.arrivalDate = LocalDateTime.parse(arrivalDate);
     }
+
+
+
+
 
     public Integer getDelay() {
         return delay;

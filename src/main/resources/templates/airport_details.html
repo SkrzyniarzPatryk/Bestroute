@@ -26,9 +26,9 @@
     </ul>
 </nav>
 <div>
-    <img th:src="${plane.getPlaneImage()}" class="img-thumbnail" style="margin: 10px;">
-    <p th:text="'Model: ' + ${plane.name}"></p>
-    <p th:text="'Comfort: ' + ${plane.comfort.name}"></p>
+    <img th:src="${airport.getAirportImage()}" class="img-thumbnail" style="margin: 10px;">
+    <p th:text="'Localization: ' + ${airport.name}"></p>
+    <p th:text="'Country: ' + ${airport.country.name}"></p>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>

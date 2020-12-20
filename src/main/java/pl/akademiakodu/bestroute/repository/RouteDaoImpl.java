@@ -46,7 +46,15 @@ public class RouteDaoImpl implements RouteDao {
 
     @Override
     public void updateRoute(Route route) {
-
+        String sql = "UPDATE routes r SET r.ID_START_AIRPORT = ?, " +
+                "r.ID_DESTINATION_AIRPORT = ?, " +
+                "r.ID_PLANE = ?, " +
+                "r.DATETIME_DEPARTURE = ?, " +
+                "r.DATETIME_ARRIVAL = ?, " +
+                "r.DELAY = ? " +
+                "WHERE r.ID = ?";
+        jdbcTemplate.update(sql, route.getStartAirport().getId(), route.getDestinationAirport().getId(),
+                route.getPlane().getId(), route.getDepartureDateLocal(), route.getArrivalDateLocal(), route.getDelay(), route.getId());
     }
 
     @Override

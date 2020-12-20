@@ -12,4 +12,7 @@ public interface PlaneService {
     boolean isPlaneLegit(Plane plane);
 
     void addPlane(Plane plane);
+
+
+    void removePlane(Long idPlane);
 }

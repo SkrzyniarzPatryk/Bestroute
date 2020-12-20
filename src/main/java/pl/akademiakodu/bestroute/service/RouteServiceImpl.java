@@ -19,12 +19,15 @@ public class RouteServiceImpl implements RouteService {
     private AirportService airportService;
     private PlaneService planeService;
     private RouteDao routeDao;
+    private List<Long> favoriteList;
 
     @Autowired
     public RouteServiceImpl(AirportService airportService, PlaneService planeService, RouteDao routeDao) {
         this.planeService = planeService;
         this.airportService = airportService;
         this.routeDao = routeDao;
+        favoriteList = new ArrayList<>();
+        favoriteList.add(1l);
  //       createRouteList();
 //        List<Route> routeList = new ArrayList<>();
 //        routeList = routeDao.findAllRoutes();
@@ -59,15 +62,15 @@ public class RouteServiceImpl implements RouteService {
             routeList.removeAll(routeList.stream().filter(route -> !route.getStartAirport().getName().equals(start_airport)).collect(Collectors.toList()));
         }
         if (!end_airport.equals("")) {
-            routeList.removeAll(routeList.stream().filter(route -> !route.getStartAirport().getName().equals(end_airport)).collect(Collectors.toList()));
+            routeList.removeAll(routeList.stream().filter(route -> !route.getDestinationAirport().getName().equals(end_airport)).collect(Collectors.toList()));
         }
         if (!from_date.equals("")) {
             LocalDateTime ldtFrom = LocalDateTime.parse(from_date);
-            routeList.removeAll(routeList.stream().filter(route -> !route.getDepartureDate().isAfter(ldtFrom)).collect(Collectors.toList()));
+            routeList.removeAll(routeList.stream().filter(route -> !route.getDepartureDateLocal().isAfter(ldtFrom)).collect(Collectors.toList()));
         }
         if (!to_date.equals("")) {
             LocalDateTime ldtTo = LocalDateTime.parse(to_date);
-            routeList.removeAll(routeList.stream().filter(route -> !route.getDepartureDate().isBefore(ldtTo)).collect(Collectors.toList()));
+            routeList.removeAll(routeList.stream().filter(route -> !route.getDepartureDateLocal().isBefore(ldtTo)).collect(Collectors.toList()));
         }
         if (!comfort.equals("")) {
             Comfort comf = Comfort.valueOf(comfort);
@@ -89,6 +92,36 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public boolean isRouteLegit(Route route) {
         return true;
+    }
+
+    @Override
+    public void removeRoute(Long id) {
+        routeDao.deleteRoute(id);
+    }
+
+    @Override
+    public void editRoute(Route route) {
+        routeDao.updateRoute(route);
+    }
+
+    @Override
+    public List<Route> getFavoriteRoutes() {
+        List<Route> result = new ArrayList<>();
+        for (Long aLong : favoriteList) {
+            result.add(routeDao.findRouteByIdSQL(aLong));
+        }
+        return result;
+    }
+
+    @Override
+    public void changeFavorite(Long id) {
+        for (Long aLong : favoriteList) {
+            if (aLong == id) {
+                favoriteList.remove(aLong);
+                return;
+            }
+        }
+        favoriteList.add(id);
     }
 
     //create
