@@ -29,7 +29,7 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public List<Airport> getAirportss() {
+    public List<Airport> getAirports() {
         return airportDao.findAllAirports();
     }
 
