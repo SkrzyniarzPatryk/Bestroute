@@ -124,6 +124,16 @@ public class RouteServiceImpl implements RouteService {
         favoriteList.add(id);
     }
 
+    @Override
+    public boolean isFavorite(Long id) {
+        for (Long aLong : favoriteList) {
+            if (aLong == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //create
 //    private void createRouteList() {
 //        routeDao.createRoute(new Route(1l, airportService.findAirportById(1l), airportService.findAirportById(2l),

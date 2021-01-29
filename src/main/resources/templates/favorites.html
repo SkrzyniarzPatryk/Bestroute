@@ -44,7 +44,7 @@
         <td th:text="${route.plane.name}"></td>
         <td th:text="${route.getDepartureDateFormat('f')}"></td>
         <td>
-            <a th:href="@{'/favorite/change/' + ${route.id} + '?path=f'}"><button class="btn btn-primary">Add to favorite!</button></a>
+            <a th:href="@{'/favorite/change/' + ${route.id} + '?path=f'}"><button th:style="${routeService.isFavorite(route.getId())} ? 'background-color: red;' : ''" class="btn btn-primary"><p style="margin-bottom: 0rem;" th:text="${routeService.isFavorite(route.getId())} ? 'Delete from favorite' : 'Add to favorite'" /></button></a>
             <a th:href="@{'/route/editor/' + ${route.id}}"><button class="btn btn-primary">Edit!</button></a>
         </td>
     </tr>

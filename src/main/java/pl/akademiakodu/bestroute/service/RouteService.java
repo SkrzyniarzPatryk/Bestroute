@@ -19,4 +19,5 @@ public interface RouteService {
 
     List<Route> getFavoriteRoutes();
     void changeFavorite(Long id);
+    boolean isFavorite(Long id);
 }

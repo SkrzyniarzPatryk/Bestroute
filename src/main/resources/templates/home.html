@@ -76,17 +76,13 @@
                 <td th:text="${route.getDepartureDateFormat('f')}"></td>
                 <td>
                     <a th:href="${route.getDetailsUrl()}"><button class="btn btn-primary">Detail</button></a>
-                    <a th:href="@{'/favorite/change/' + ${route.id} + '?path=h'}">
-                        <button class="btn btn-primary">Add to favorite</button>
-                    </a>
+                    <a th:href="@{'/favorite/change/' + ${route.id} + '?path=h'}"><button th:style="${routeService.isFavorite(route.getId())} ? 'background-color: red;' : ''" class="btn btn-primary"><p style="margin-bottom: 0rem;" th:text="${routeService.isFavorite(route.getId())} ? 'Delete from favorite' : 'Add to favorite'" /></button></a>
                     <a th:href="@{'/route/editor/' + ${route.id}}"><button class="btn btn-primary">Edit!</button></a>
                 </td>
             </tr>
         </tbody>
     </table>
-
-    <p th:text="${favorites.get(0).id}"></p>
-
+<button value="dsfsdfds"></button>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>

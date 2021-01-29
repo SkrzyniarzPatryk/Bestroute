@@ -33,11 +33,13 @@ public class RouteController {
             model.addAttribute("routeList", routeService.searchRoutesByAirport(start_airport, end_airport, from_date, to_date, comfort));
         }
         model.addAttribute("favorites", routeService.getFavoriteRoutes());
+        model.addAttribute("routeService", routeService);
         return "home";
     }
     @GetMapping("/favorite")
     public String getFavorites(Model model) {
         model.addAttribute("favorites", routeService.getFavoriteRoutes());
+        model.addAttribute("routeService", routeService);
         return "favorites";
     }
     @GetMapping("/favorite/change/{id}")
